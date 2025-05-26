@@ -27,17 +27,19 @@ describe('тестирование редьюсера orderSlice', () => {
       }
     };
 
-    test('тест синхронного экшена getOrderByNumber.pending', () => {
+    test('должен установить состояние загрузки при поиске заказа', () => {
       const nextState = orderSlice(initialState, actions.pending);
       expect(nextState.request).toBe(true);
       expect(nextState.error).toBe(actions.pending.payload);
     });
-    test('тест синхронного экшена getOrderByNumber.rejected', () => {
+
+    test('должен обработать ошибку при поиске заказа', () => {
       const nextState = orderSlice(initialState, actions.rejected);
       expect(nextState.request).toBe(false);
       expect(nextState.error).toBe(actions.rejected.error.message);
     });
-    test('тест синхронного экшена getOrderByNumber.fulfilled', () => {
+
+    test('должен сохранить данные заказа при успешном поиске', () => {
       const nextState = orderSlice(initialState, actions.fulfilled);
       expect(nextState.request).toBe(false);
       expect(nextState.error).toBe(null);

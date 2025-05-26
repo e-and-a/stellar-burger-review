@@ -38,22 +38,22 @@ describe('тестирование редьюсера feedSlice', () => {
       }
     };
 
-    test('тест синхронного экшена getFeeds.pending', () => {
+    test('должен установить состояние загрузки при запросе ленты заказов', () => {
       const state = feedSlice(initialState, actions.pending);
       expect(state.loading).toBe(true);
       expect(state.error).toBe(actions.pending.payload);
     });
 
-    test('тест синхронного экшена getFeeds.rejected', () => {
+    test('должен обработать ошибку при получении ленты заказов', () => {
       const state = feedSlice(initialState, actions.rejected);
       expect(state.loading).toBe(false);
       expect(state.error).toBe(actions.rejected.error.message);
     });
 
-    test('тест синхронного экшена getFeeds.fulfilled', () => {
-      const nextState = feedSlice(initialState, actions.fulfilled);
-      expect(nextState.loading).toBe(false);
-      expect(nextState.orders).toEqual(actions.fulfilled.payload.orders);
+    test('должен сохранить ленту заказов при успешном запросе', () => {
+      const state = feedSlice(initialState, actions.fulfilled);
+      expect(state.loading).toBe(false);
+      expect(state.orders).toEqual(actions.fulfilled.payload.orders);
     });
   });
 });

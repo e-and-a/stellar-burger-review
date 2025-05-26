@@ -47,19 +47,19 @@ describe('тестирование редьюсера ingredientSlice', () => {
       }
     };
 
-    test('тест синхронного экшена getIngredients.pending', () => {
+    test('должен установить состояние загрузки при запросе ингредиентов', () => {
       const state = ingredientSlice(initialState, actions.pending);
       expect(state.loading).toBe(true);
       expect(state.error).toBe(actions.pending.payload);
     });
 
-    test('тест синхронного экшена getIngredients.rejected', () => {
+    test('должен обработать ошибку при получении ингредиентов', () => {
       const state = ingredientSlice(initialState, actions.rejected);
       expect(state.loading).toBe(false);
       expect(state.error).toBe(actions.rejected.error.message);
     });
 
-    test('тест синхронного экшена getIngredients.fulfilled', () => {
+    test('должен сохранить список ингредиентов при успешном запросе', () => {
       const nextState = ingredientSlice(initialState, actions.fulfilled);
       expect(nextState.loading).toBe(false);
       expect(nextState.ingredients).toEqual(actions.fulfilled.payload);

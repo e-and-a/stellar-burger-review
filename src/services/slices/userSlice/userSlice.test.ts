@@ -51,19 +51,19 @@ describe('тестирование редьюсера userSlice', () => {
       }
     };
 
-    test('тест синхронного экшена getUser.pending', () => {
+    test('должен установить состояние загрузки при запросе данных пользователя', () => {
       const state = userSlice(initialState, actions.pending);
       expect(state.request).toBe(false);
       expect(state.error).toBe(actions.pending.payload);
     });
 
-    test('тест синхронного экшена getUser.rejected', () => {
+    test('должен обработать ошибку при получении данных пользователя', () => {
       const state = userSlice(initialState, actions.rejected);
       expect(state.request).toBe(false);
       expect(state.error).toBe(actions.rejected.payload);
     });
 
-    test('тест синхронного экшена getUser.fulfilled', () => {
+    test('должен сохранить данные пользователя при успешном запросе', () => {
       const nextState = userSlice(initialState, actions.fulfilled);
       expect(nextState.request).toBe(false);
       expect(nextState.userData).toEqual(actions.fulfilled.payload.user);
@@ -86,19 +86,19 @@ describe('тестирование редьюсера userSlice', () => {
       }
     };
 
-    test('тест синхронного экшена getOrdersAll.pending', () => {
+    test('должен установить флаг загрузки при запросе истории заказов', () => {
       const state = userSlice(initialState, actions.pending);
       expect(state.request).toBe(true);
       expect(state.error).toBe(actions.pending.payload);
     });
 
-    test('тест синхронного экшена getOrdersAll.rejected', () => {
+    test('должен обработать ошибку при получении истории заказов', () => {
       const state = userSlice(initialState, actions.rejected);
       expect(state.request).toBe(false);
       expect(state.error).toBe(actions.rejected.error.message);
     });
 
-    test('тест синхронного экшена getOrdersAll.fulfilled', () => {
+    test('должен сохранить историю заказов при успешном запросе', () => {
       const nextState = userSlice(initialState, actions.fulfilled);
       expect(nextState.request).toBe(false);
       expect(nextState.userOrders).toEqual(actions.fulfilled.payload);
@@ -121,19 +121,19 @@ describe('тестирование редьюсера userSlice', () => {
       }
     };
 
-    test('тест синхронного экшена registerUser.pending', () => {
+    test('должен установить состояние загрузки при регистрации', () => {
       const nextState = userSlice(initialState, actions.pending);
       expect(nextState.request).toBe(true);
       expect(nextState.error).toBe(actions.pending.payload);
     });
 
-    test('тест синхронного экшена registerUser.rejected', () => {
+    test('должен обработать ошибку при регистрации', () => {
       const nextState = userSlice(initialState, actions.rejected);
       expect(nextState.request).toBe(false);
       expect(nextState.error).toBe(actions.rejected.error.message);
     });
 
-    test('тест синхронного экшена registerUser.fulfilled', () => {
+    test('должен сохранить данные пользователя после успешной регистрации', () => {
       const nextState = userSlice(initialState, actions.fulfilled);
       expect(nextState.request).toBe(false);
       expect(nextState.error).toBe(null);
@@ -157,7 +157,7 @@ describe('тестирование редьюсера userSlice', () => {
       }
     };
 
-    test('тест синхронного экшена loginUser.pending', () => {
+    test('должен установить состояние авторизации при входе', () => {
       const nextState = userSlice(initialState, actions.pending);
       expect(nextState.loginUserRequest).toBe(true);
       expect(nextState.isAuthChecked).toBe(true);
@@ -165,7 +165,7 @@ describe('тестирование редьюсера userSlice', () => {
       expect(nextState.error).toBe(actions.pending.payload);
     });
 
-    test('тест синхронного экшена loginUser.rejected', () => {
+    test('должен обработать ошибку при входе в систему', () => {
       const nextState = userSlice(initialState, actions.rejected);
       expect(nextState.isAuthChecked).toBe(false);
       expect(nextState.isAuthenticated).toBe(false);
@@ -173,7 +173,7 @@ describe('тестирование редьюсера userSlice', () => {
       expect(nextState.error).toBe(actions.rejected.error.message);
     });
 
-    test('тест синхронного экшена loginUser.fulfilled', () => {
+    test('должен установить авторизацию после успешного входа', () => {
       const nextState = userSlice(initialState, actions.fulfilled);
       expect(nextState.isAuthChecked).toBe(false);
       expect(nextState.isAuthenticated).toBe(true);
@@ -199,19 +199,19 @@ describe('тестирование редьюсера userSlice', () => {
       }
     };
 
-    test('тест синхронного экшена updateUser.pending', () => {
+    test('должен установить состояние загрузки при обновлении данных', () => {
       const nextState = userSlice(initialState, actions.pending);
       expect(nextState.request).toBe(true);
       expect(nextState.error).toBe(actions.pending.payload);
     });
 
-    test('тест синхронного экшена updateUser.rejected', () => {
+    test('должен обработать ошибку при обновлении данных', () => {
       const nextState = userSlice(initialState, actions.rejected);
       expect(nextState.request).toBe(false);
       expect(nextState.error).toBe(actions.rejected.error.message);
     });
 
-    test('тест синхронного экшена updateUser.fulfilled', () => {
+    test('должен обновить данные пользователя после успешного запроса', () => {
       const nextState = userSlice(initialState, actions.fulfilled);
       expect(nextState.request).toBe(false);
       expect(nextState.error).toBe(null);
@@ -235,7 +235,7 @@ describe('тестирование редьюсера userSlice', () => {
       }
     };
 
-    test('тест синхронного экшена logoutUser.pending', () => {
+    test('должен установить состояние выхода из системы', () => {
       const nextState = userSlice(initialState, actions.pending);
       expect(nextState.request).toBe(true);
       expect(nextState.isAuthChecked).toBe(true);
@@ -243,7 +243,7 @@ describe('тестирование редьюсера userSlice', () => {
       expect(nextState.error).toBe(actions.pending.payload);
     });
 
-    test('тест синхронного экшена logoutUser.rejected', () => {
+    test('должен обработать ошибку при выходе из системы', () => {
       const nextState = userSlice(initialState, actions.rejected);
       expect(nextState.isAuthChecked).toBe(false);
       expect(nextState.isAuthenticated).toBe(true);
@@ -251,7 +251,7 @@ describe('тестирование редьюсера userSlice', () => {
       expect(nextState.error).toBe(actions.rejected.error.message);
     });
 
-    test('тест синхронного экшена logoutUser.fulfilled', () => {
+    test('должен сбросить авторизацию после успешного выхода', () => {
       const nextState = userSlice(initialState, actions.fulfilled);
       expect(nextState.isAuthChecked).toBe(false);
       expect(nextState.isAuthenticated).toBe(false);
