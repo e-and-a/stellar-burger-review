@@ -1,0 +1,8 @@
+node_modules
+.env
+.idea
+cypress
+src/services
+cypress.config.ts
+jest.config.ts
+dist
